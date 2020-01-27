@@ -3,7 +3,7 @@ const colors = {
     wrapperBackground: "#E6E1C3",
     headerBackground: "#C1C72C",
     headerColor: "black",
-    photoBorderColor: "#black"
+    photoBorderColor: "black"
   },
   blue: {
     wrapperBackground: "#5F64D3",
@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML(data) {
+var generateHTML = function(data) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -33,7 +33,7 @@ function generateHTML(data) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
-      <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet"/>
       <title>Document</title>
       <style>
           @page {
@@ -175,7 +175,7 @@ function generateHTML(data) {
     <body >
       <header  class="wrapper">
         <div class="photo-header">
-            <img src="${data.profile.avatar_url}" />
+            <img src="${data.profile.avatar_url}" alt="Profile picture"/>
             <h1>HI!</h1>
             <h2>My name is ${data.profile.name}!</h2>
             <h3>Currently @ ${data.profile.company}</h3>
@@ -225,4 +225,10 @@ function generateHTML(data) {
     <footer class="wrapper"></footer>
   </body>
 </html>`
+};
+
+var HTMLBuilder = function () {
+  this.generateHTML = generateHTML;
 }
+
+module.exports = HTMLBuilder;

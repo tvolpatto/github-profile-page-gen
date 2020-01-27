@@ -1,3 +1,4 @@
+var HTMLBuilder = require("./generateHTML");
 var inquirer = require("inquirer");
 var fs = require('fs');
 var axios = require('axios');
@@ -21,8 +22,24 @@ const questions = [
       }
 ];
 
-function writeToFile(fileName, data) {
+const htmlData =  {
+  color: "",
+  profile :{}
+}
 
+function writeToFile(fileName, data) {
+     fs.writeFile(fileName, data, function(err) {
+       if (err) {
+         return console.log(err);
+       }
+       console.log("Success!");
+    
+     });
+}
+
+function createHTML(htmlData) {
+  const html = new HTMLBuilder().generateHTML(htmlData);
+  writeToFile("index.html", html);
 }
 
 function getData() {
@@ -32,11 +49,13 @@ function getData() {
       throw new Error("Invalid 'username'!");
     }
 
+    htmlData.color = answers.colors;
     const queryUrl = `https://api.github.com/users/${answers.username}`;
 
     axios.get(queryUrl).then(function (res) {     
-      const repos = res.data;
-      console.log(repos);
+      htmlData.profile = res.data;
+      createHTML(htmlData);
+
     });
   
   }).catch(function (err) {
