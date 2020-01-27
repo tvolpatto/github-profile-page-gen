@@ -22,7 +22,7 @@ const questions = [
 ];
 
 function writeToFile(fileName, data) {
-  
+
 }
 
 function getData() {
@@ -32,7 +32,7 @@ function getData() {
       throw new Error("Invalid 'username'!");
     }
 
-    const queryUrl = `https://api.github.com/users/${answers.username}/repos?per_page=100`;
+    const queryUrl = `https://api.github.com/users/${answers.username}`;
 
     axios.get(queryUrl).then(function (res) {     
       const repos = res.data;
