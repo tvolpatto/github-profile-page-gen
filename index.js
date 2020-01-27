@@ -22,13 +22,31 @@ const questions = [
 ];
 
 function writeToFile(fileName, data) {
- 
+  
+}
+
+function getData() {
+  inquirer.prompt(questions).then(function(answers) {
+    
+    if (answers.username === "") {
+      throw new Error("Invalid 'username'!");
+    }
+
+    const queryUrl = `https://api.github.com/users/${answers.username}/repos?per_page=100`;
+
+    axios.get(queryUrl).then(function (res) {     
+      const repos = res.data;
+      console.log(repos);
+    });
+  
+  }).catch(function (err) {
+    console.log(err);
+  });
 }
 
 function init() {
-  inquirer.prompt(questions).then(function(answers) {
-      console.log(answers);
-  });
+ getData();
+
 }
 
 init();
