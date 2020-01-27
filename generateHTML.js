@@ -170,5 +170,59 @@ function generateHTML(data) {
             zoom: .75; 
           } 
          }
-      </style>`
-        }
+      </style>
+    </head>
+    <body >
+      <header  class="wrapper">
+        <div class="photo-header">
+            <img src="${data.profile.avatar_url}" />
+            <h1>HI!</h1>
+            <h2>My name is ${data.profile.name}!</h2>
+            <h3>Currently @ ${data.profile.company}</h3>
+            <div class="links-nav">
+                <a href="#" class="nav-link"><i class="fas fa-location-arrow"></i>${data.profile.location}</a>
+                <a href="${data.profile.html_url}" class="nav-link"><i class="fab fa-github-alt"></i> GitHub</a>
+                <a href="${data.profile.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
+            </div>
+        </div>
+      </header>
+
+      <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>${data.profile.bio}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h3>Public Repositories</h3>
+                    <h4>${data.profile.public_repos}</h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h3>Followers</h3>
+                    <h4>${data.profile.followers}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h3>GitHub Stars</h3>
+                    <h4>${data.profile.public_gists}</h4>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h3>Following</h3>
+                    <h4>${data.profile.following}</h4>
+                </div>
+            </div>
+        </div>
+      </div>
+    <footer class="wrapper"></footer>
+  </body>
+</html>`
+}
