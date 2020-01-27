@@ -2,6 +2,10 @@ var HTMLBuilder = require("./generateHTML");
 var inquirer = require("inquirer");
 var fs = require('fs');
 var axios = require('axios');
+var htmlToPdf = require('html-pdf');
+const util = require("util");
+
+const readFileAsync = util.promisify(fs.readFile);
 
 const questions = [
     {
@@ -32,14 +36,23 @@ function writeToFile(fileName, data) {
        if (err) {
          return console.log(err);
        }
-       console.log("Success!");
-    
+       createPDF();
      });
 }
 
 function createHTML(htmlData) {
   const html = new HTMLBuilder().generateHTML(htmlData);
   writeToFile("index.html", html);
+}
+
+function createPDF() {
+  const options  = {format: 'Letter'};
+  readFileAsync("index.html", "utf8").then(function(data) {
+    htmlToPdf.create(data, options).toFile('./profile.pdf', function(err, res) {
+      if (err) return console.log(err);
+      console.log(res); 
+    });
+  });
 }
 
 function getData() {
