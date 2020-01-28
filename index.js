@@ -26,10 +26,12 @@ const questions = [
       }
 ];
 
-const htmlData =  {
+const htmlData = {
   color: "",
   profile :{}
-}
+};
+
+const HTMLFILENAME = "index.html";
 
 function writeToFile(fileName, data) {
      fs.writeFile(fileName, data, function(err) {
@@ -42,12 +44,12 @@ function writeToFile(fileName, data) {
 
 function createHTML(htmlData) {
   const html = new HTMLBuilder().generateHTML(htmlData);
-  writeToFile("index.html", html);
+  writeToFile(HTMLFILENAME, html);
 }
 
 function createPDF() {
   const options  = {format: 'Letter'};
-  readFileAsync("index.html", "utf8").then(function(data) {
+  readFileAsync(HTMLFILENAME, "utf8").then(function(data) {
     htmlToPdf.create(data, options).toFile('./profile.pdf', function(err, res) {
       if (err) return console.log(err);
       console.log(res); 
