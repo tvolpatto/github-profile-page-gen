@@ -1,11 +1,7 @@
 var HTMLBuilder = require("./generateHTML");
 var inquirer = require("inquirer");
-var fs = require('fs');
 var axios = require('axios');
 var htmlToPdf = require('html-pdf');
-const util = require("util");
-
-const readFileAsync = util.promisify(fs.readFile);
 
 const questions = [
   {
@@ -36,13 +32,16 @@ function writeToFile(data) {
   htmlToPdf.create(html).toFile('./profile.pdf', function(err, res) {
     if (err) return console.log(err);
     
-    console.log(res); 
+    console.log("GitHub resume created!");
+    console.log("---------------------");
+    console.log(`File: ${res.filename}`);
+    console.log("---------------------");
+    console.log("Thank you!"); 
   });
 }
 
 function inquiryUser() {
-  inquirer.prompt(questions).then(function(answers) {    
-   
+  inquirer.prompt(questions).then(function(answers) {     
     htmlData.color = answers.colors;   
     callGithubUserAPI(answers.username);
     
@@ -60,6 +59,14 @@ function callGithubUserAPI(username) {
     htmlData.profile = res.data;
     writeToFile(htmlData);
   
+  }).catch(function (err) {
+    const response = err.response;
+    
+    if(response.status === 404) {
+      console.log(`User '${username}' not found!`);
+    } else {
+      console.log(response.status +" - "+ response.statusText);
+    }   
   });
 }
 
