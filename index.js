@@ -31,32 +31,12 @@ const htmlData = {
   profile: {}
 };
 
-const HTMLFILENAME = "index.html";
-
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, function(err) {
-    if (err) {
-      return console.log(err);
-    }
+function writeToFile(data) {
+  const html = new HTMLBuilder().generateHTML(data);
+  htmlToPdf.create(html).toFile('./profile.pdf', function(err, res) {
+    if (err) return console.log(err);
     
-    createPDF();
-  });
-}
-
-function createHTML(htmlData) {
-  const html = new HTMLBuilder().generateHTML(htmlData);
-  writeToFile(HTMLFILENAME, html);
-}
-
-function createPDF() {
-  const options  = {format: 'Letter'};
-
-  readFileAsync(HTMLFILENAME, "utf8").then(function(data) {
-    htmlToPdf.create(data, options).toFile('./profile.pdf', function(err, res) {
-      if (err) return console.log(err);
-      
-      console.log(res); 
-    });
+    console.log(res); 
   });
 }
 
@@ -78,7 +58,7 @@ function callGithubUserAPI(username) {
 
   axios.get(queryUrl).then(function (res) {     
     htmlData.profile = res.data;
-    createHTML(htmlData);
+    writeToFile(htmlData);
   
   });
 }
