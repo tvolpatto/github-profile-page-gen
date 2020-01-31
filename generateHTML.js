@@ -195,20 +195,25 @@ var generateHTML = function(data) {
   </head> 
   <body>
       <div class="wrapper">
-          <header>
-              <div class="photo-header">
-                  <img src="${data.profile.avatar_url}" alt="Profile picture" />
-                  <h1>HI!</h1>
-                  <h2>My name is ${data.profile.name}!</h2>
-                  <h3>Currently @ ${data.profile.company}</h3>
-                  <div class="links-nav">
-                      <a href="#" class="nav-link"><i class="fas fa-location-arrow"></i>${data.profile.location}</a>
-                      <a href="${data.profile.html_url}" class="nav-link"><i class="fab fa-github-alt"></i> GitHub</a>
-                      <a href="${data.profile.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
-                  </div>
+          <div class="photo-header">
+            <div class="row">
+              <div class="col">
+                <img src="${data.profile.avatar_url}" alt="Profile picture" />
               </div>
-          </header>
-  
+            </div>
+            <h1>HI!</h1>
+            <h2>My name is ${data.profile.name}!</h2>
+            <div class="row">
+              <div class="col">
+                <h3>Currently @ ${data.profile.company}</h3>
+              </div>
+            </div>            
+            <div class="links-nav">
+              <a href="#" class="nav-link"><i class="fas fa-location-arrow"></i> ${data.profile.location}</a>
+              <a href="${data.profile.html_url}" class="nav-link"><i class="fab fa-github-alt"></i> GitHub</a>
+              <a href="${data.profile.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
+            </div>
+          </div> 
           <main>
               <div class="container">
                   <div class="row">
