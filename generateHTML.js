@@ -202,36 +202,36 @@ var generateHTML = function(data) {
               </div>
             </div>
             <h1>HI!</h1>
-            <h2>My name is ${data.profile.name}!</h2>
+            <h2>My name is ${data.profile.name || '-'}!</h2>
             <div class="row">
               <div class="col">
-                <h3>Currently @ ${data.profile.company}</h3>
+                <h3>Currently @ ${data.profile.company|| '-'}</h3>
               </div>
             </div>            
             <div class="links-nav">
-              <a href="#" class="nav-link"><i class="fas fa-location-arrow"></i> ${data.profile.location}</a>
-              <a href="${data.profile.html_url}" class="nav-link"><i class="fab fa-github-alt"></i> GitHub</a>
-              <a href="${data.profile.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
+              <a href="https://www.google.com/maps/place/${data.profile.location || ''}" class="nav-link"><i class="fas fa-location-arrow"></i> ${data.profile.location || '-'}</a>
+              <a href="${data.profile.html_url || '#'}" class="nav-link"><i class="fab fa-github-alt"></i> GitHub</a>
+              <a href="${data.profile.blog || '#'}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
             </div>
           </div> 
           <main>
               <div class="container">
                   <div class="row">
                       <div class="col">
-                          <h3>${data.profile.bio}</h3>
+                          <h3>${data.profile.bio || '-'}</h3>
                       </div>
                   </div>
                   <div class="row">
                       <div class="col">
                           <div class="card">
                               <h3>Public Repositories</h3>
-                              <h4>${data.profile.public_repos}</h4>
+                              <h4>${data.profile.public_repos || '-'}</h4>
                           </div>
                       </div>
                       <div class="col">
                           <div class="card">
                               <h3>Followers</h3>
-                              <h4>${data.profile.followers}</h4>
+                              <h4>${data.profile.followers || '-'}</h4>
                           </div>
                       </div>
                   </div>
@@ -239,13 +239,13 @@ var generateHTML = function(data) {
                       <div class="col">
                           <div class="card">
                               <h3>GitHub Stars</h3>
-                              <h4>${data.profile.public_gists}</h4>
+                              <h4>${data.profile.public_gists || '-'}</h4>
                           </div>
                       </div>
                       <div class="col">
                           <div class="card">
                               <h3>Following</h3>
-                              <h4>${data.profile.following}</h4>
+                              <h4>${data.profile.following || '-'}</h4>
                           </div>
                       </div>
                   </div>
